@@ -1,0 +1,40 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.require_version ">= 1.5.0"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  config.vm.hostname = "android-machine-berkshelf"
+
+  config.omnibus.chef_version = :latest
+
+  config.vm.box = "hashicorp/precise64"
+
+  config.vm.synced_folder "../../", "/home/vagrant/project"
+
+  config.vm.provider :lxc do |lxc, override|
+    override.vm.box = "fgrehm/saucy64-lxc"
+  end
+
+  config.berkshelf.enabled = true
+
+  config.vm.provision :chef_solo do |chef|
+    chef.json = {
+      "java" => {
+        "jdk_version" => '7'
+      },
+      "android-sdk" => {
+        "owner" => 'vagrant',
+        "group" => 'vagrant',
+        "maven-rescue" => true,
+        "maven-local-repository" => '/home/vagrant/.m2/repository'
+      },
+    }
+    chef.run_list = [
+        "recipe[android-machine::default]"
+    ]
+  end
+end

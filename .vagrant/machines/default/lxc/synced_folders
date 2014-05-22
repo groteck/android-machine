@@ -1,0 +1,1 @@
+{"lxc":{"/home/vagrant/project":{"guestpath":"/home/vagrant/project","hostpath":"/home/fraire/projects"},"/vagrant":{"guestpath":"/vagrant","hostpath":"/home/fraire/projects/sysadmin/android-machine"},"v-csc-1":{"id":"v-csc-1","guestpath":"/tmp/vagrant-chef-4/chef-solo-1/cookbooks","hostpath":"/home/fraire/.berkshelf/default/vagrant/berkshelf-20140522-5697-aralwk-default"}}}
